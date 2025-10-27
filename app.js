@@ -94,11 +94,26 @@ app.get('/users', function (req, res) {
 });
 
 
-// Route to get random 10 data
+// Route to get all data
 app.get('/allData', (req, res) => {
-    let shuffled = airbnbData.sort(() => 0.5 - Math.random());
-    let selected = shuffled.slice(0, 10);
-    res.render('pages/allData', { title: 'Random 10 Data', data: selected });
+    async function loadData() {
+        const url = "https://robust-violet-camel.myfilebase.com/ipfs/QmWuoZ7UW4aBCkUEykCQ8i6G7JFzLbE3S85f2VvYTjxi7y";
+
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            airbnbData = await response.json();
+            console.log("Data successfully loaded from remote URL.");
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            airbnbData = [];
+        }
+
+        res.render('pages/allData', { title: 'All Data', data: airbnbData });
+    }
+    loadData();
 });
 
 // Route to get data by index
