@@ -1,0 +1,46 @@
+<h3>Search by Property ID</h3>
+
+<form action="/search/id" method="GET">
+    <input type="text" name="id" placeholder="Enter Property ID" value="{{id}}" required />
+    <button type="submit">Search</button>
+</form>
+
+{{#if errors}}
+  <ul style="color:red; margin-top:10px; list-style: none;">
+    {{#each errors}}
+      <li>{{this.msg}}</li>
+    {{/each}}
+  </ul>
+{{/if}}
+
+{{#if data}}
+    <h3>Results for Property ID "{{id}}"</h3>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>Room Type</th>
+                <th>Price</th>
+                <th>Neighbourhood</th>
+                <th>Cancellation Policy</th>
+                <th>Thumbnail</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{data.id}}</td>
+                <td>{{data.NAME}}</td>
+                <td>{{data.country}}</td>
+                <td>{{data.property_type}}</td>
+                <td>{{data.price}}</td>
+                <td>{{data.neighbourhood}}</td>
+                <td>{{data.cancellation_policy}}</td>
+                <td><img src="{{data.thumbnail}}" alt="Property Image" width="100"/></td>
+            </tr>
+        </tbody>
+    </table>
+{{else if id}}
+    <p>{{message}}</p>
+{{/if}}

@@ -1,0 +1,30 @@
+<h2>{{title}}</h2>
+
+<table border="1" cellpadding="5" cellspacing="0">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Country</th>
+      <th>Property Type</th>
+      <th>Price</th>
+      <th>Service Fee</th>
+      <th>Neighbourhood</th>
+      <th>Thumbnail</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each data}}
+        <tr style="{{highlightRow this.[service fee]}}">
+          <td>{{this.id}}</td>
+          <td>{{this.NAME}}</td>
+          <td>{{this.country}}</td>
+          <td>{{this.property_type}}</td>
+          <td>{{this.price}}</td>
+          <td>{{serviceFeeValue this.[service fee]}}</td>
+          <td>{{this.neighbourhood}}</td>
+          <td><img src="{{this.thumbnail}}" alt="Image" width="100"></td>
+        </tr>
+    {{/each}}
+  </tbody>
+</table>

@@ -1,0 +1,30 @@
+<h3>Search Property by Index</h3>
+
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Property Type</th>
+            <th>Price</th>
+            <th>Neighbourhood</th>
+            <th>Cancellation Policy</th>
+            <th>Thumbnail</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.NAME}}</td>
+            <td>{{this.country}}</td>
+            <td>{{this.property_type}}</td>
+            <td>${{this.price}}</td>
+            <td>{{this.neighbourhood}}</td>
+            <td>{{this.cancellation_policy}}</td>
+            <td><img src="{{this.thumbnail}}" alt="Property Image" width="100"/></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

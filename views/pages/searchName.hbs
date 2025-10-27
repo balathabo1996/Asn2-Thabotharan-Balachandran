@@ -1,0 +1,58 @@
+<h3>Search by Name</h3>
+
+<form action="/search/name" method="GET">
+  <input
+    type="text"
+    name="name"
+    placeholder="Enter Property Name"
+    value="{{name}}"
+    required
+  />
+  <button type="submit">Search</button>
+</form>
+
+{{#if errors}}
+  <ul style="color: red; list-style: none;">
+    {{#each errors}}
+      <li>{{this.msg}}</li>
+    {{/each}}
+  </ul>
+{{/if}}
+
+{{#if data.length}}
+  <h3>Results for Name containing "{{searchName}}"</h3>
+  <table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Property Type</th>
+        <th>Price</th>
+        <th>Neighbourhood</th>
+        <th>Cancellation Policy</th>
+        <th>Thumbnail</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each data}}
+        <tr>
+          <td>{{this.id}}</td>
+          <td>{{this.NAME}}</td>
+          <td>{{this.country}}</td>
+          <td>{{this.property_type}}</td>
+          <td>${{this.price}}</td>
+          <td>{{this.neighbourhood}}</td>
+          <td>{{this.cancellation_policy}}</td>
+          <td><img
+              src="{{this.thumbnail}}"
+              alt="Property Image"
+              width="100"
+            /></td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else if searchName}}
+  <p>{{message}}</p>
+{{/if}}

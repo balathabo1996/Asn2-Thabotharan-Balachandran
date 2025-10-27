@@ -1,0 +1,21 @@
+{
+  "name": "asn2-thabotharan-balachandran",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "csv-parser": "^3.2.0",
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.3",
+    "express-validator": "^7.3.0",
+    "path": "^0.12.7"
+  }
+}
