@@ -110,7 +110,7 @@ app.get('/allData', (req, res) => {
             airbnbData = [];
         }
         const selectedData = airbnbData.slice(0, 100);
-        res.render('pages/searchIndex', { title: '100 Airbnb Data', data: selectedData });
+        res.render('pages/searchIndex', { title: 'All Airbnb Data', data: selectedData });
     }
     loadData();
 });
