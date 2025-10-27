@@ -94,11 +94,10 @@ app.get('/users', function (req, res) {
 });
 
 
-// Route to get all data
+// Route to get 100 data
 app.get('/allData', (req, res) => {
     async function loadData() {
         const url = "https://robust-violet-camel.myfilebase.com/ipfs/QmWuoZ7UW4aBCkUEykCQ8i6G7JFzLbE3S85f2VvYTjxi7y";
-
         try {
             const response = await fetch(url);
             if (!response.ok) {
@@ -110,8 +109,8 @@ app.get('/allData', (req, res) => {
             console.error("Error fetching data:", error);
             airbnbData = [];
         }
-
-        res.render('pages/allData', { title: 'All Data', data: airbnbData });
+        const selectedData = airbnbData.slice(0, 100);
+        res.render('pages/searchIndex', { title: 'Search Property by Index', data: selectedData });
     }
     loadData();
 });
