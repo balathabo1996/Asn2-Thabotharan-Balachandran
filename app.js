@@ -95,22 +95,8 @@ app.get('/users', function (req, res) {
 
 // Route to get 100 data
 app.get('/allData', (req, res) => {
-    async function loadData() {
-        const url = "https://dl.dropboxusercontent.com/scl/fi/rc3pwbf1acw8079en8o17/airbnb_with_photos.json?rlkey=2h5ahs32jzwmeuankdq2cjwl6&st=dm3645ce";
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            airbnbData = await response.json();
-            console.log("Data successfully loaded from remote URL.");
-        } catch (error) {
-            console.error("Error fetching data:", error);
-            airbnbData = [];
-        }
-        const selectedData = airbnbData.slice(0, 100);
-        res.render('pages/allData', { title: 'All Airbnb Data', data: selectedData });
-    }
+    const selectedData = airbnbData.slice(0, 1000);
+    res.render('pages/allData', { title: 'All Airbnb Data', data: selectedData });
     loadData();
 });
 
@@ -168,22 +154,8 @@ app.get('/search/name', query('name')
 
 // Route to view all Airbnb data
 app.get('/viewData', (req, res) => {
-    async function loadData() {
-        const url = "https://dl.dropboxusercontent.com/scl/fi/rc3pwbf1acw8079en8o17/airbnb_with_photos.json?rlkey=2h5ahs32jzwmeuankdq2cjwl6&st=dm3645ce";
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            airbnbData = await response.json();
-            console.log("Data successfully loaded from remote URL.");
-        } catch (error) {
-            console.error("Error fetching data:", error);
-            airbnbData = [];
-        }
-        const selectedData = airbnbData.slice(0, 1000);
-        res.render('pages/viewData', { title: 'View All Airbnb Filled Data', data: selectedData });
-    }
+    const selectedData = airbnbData.slice(0, 1000);
+    res.render('pages/viewData', { title: 'View All Airbnb Filled Data', data: selectedData });
     loadData();
 });
 
