@@ -58,7 +58,7 @@ let airbnbData = [];
 
 // Function to load data from remote URL
 async function loadData() {
-    const url = "https://www.dropbox.com/scl/fi/rc3pwbf1acw8079en8o17/airbnb_with_photos.json?rlkey=2h5ahs32jzwmeuankdq2cjwl6&st=dm3645ce&raw=1";
+    const url = "https://dl.dropboxusercontent.com/scl/fi/rc3pwbf1acw8079en8o17/airbnb_with_photos.json?rlkey=2h5ahs32jzwmeuankdq2cjwl6&st=dm3645ce";
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -96,7 +96,7 @@ app.get('/users', function (req, res) {
 // Route to get 100 data
 app.get('/allData', (req, res) => {
     async function loadData() {
-        const url = "https://www.dropbox.com/scl/fi/rc3pwbf1acw8079en8o17/airbnb_with_photos.json?rlkey=2h5ahs32jzwmeuankdq2cjwl6&st=dm3645ce&raw=1";
+        const url = "https://dl.dropboxusercontent.com/scl/fi/rc3pwbf1acw8079en8o17/airbnb_with_photos.json?rlkey=2h5ahs32jzwmeuankdq2cjwl6&st=dm3645ce";
         try {
             const response = await fetch(url);
             if (!response.ok) {
