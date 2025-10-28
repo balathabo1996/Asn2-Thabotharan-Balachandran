@@ -55,6 +55,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Load data before starting the server
 let airbnbData = [];
+let selectedData = [];
 
 // Function to load data from remote URL
 async function loadData() {
@@ -70,6 +71,7 @@ async function loadData() {
         console.error("Error fetching data:", error);
         airbnbData = [];
     }
+    selectedData = airbnbData.slice(0, 5000);
 }
 
 // Load data and then start the server
@@ -95,7 +97,6 @@ app.get('/users', function (req, res) {
 
 // Route to get 100 data
 app.get('/allData', (req, res) => {
-    const selectedData = airbnbData.slice(0, 1000);
     res.render('pages/allData', { title: 'All Airbnb Data', data: selectedData });
     loadData();
 });
@@ -104,11 +105,12 @@ app.get('/allData', (req, res) => {
 app.get('/allData/:index', (req, res) => {
     const index = parseInt(req.params.index);
     if (!isNaN(index) && index >= 0 && index < airbnbData.length) {
-        const selectedData = [airbnbData[index]];
-        res.render('pages/searchIndex', { title: 'Search Property by Index', data: selectedData });
+        const data = [selectedData[index]];
+        res.render('pages/searchIndex', { title: 'Search Property by Index', data: data });
     } else {
         res.status(400).send("Invalid index!");
     }
+    loadData();
 });
 
 
@@ -123,8 +125,9 @@ app.get('/search/id', query('id')
         }
 
         const id = req.query.id;
-        const found = airbnbData.find(p => p.id == id);
+        const found = selectedData.find(p => p.id == id);
         res.render('pages/searchID', { title: 'Search by ID', id, data: found });
+        loadData();
     });
 
 
@@ -142,26 +145,27 @@ app.get('/search/name', query('name')
 
         let found = [];
         if (name) {
-            found = airbnbData.filter(p => p.NAME && p.NAME.trim().toLowerCase().includes(name)
+            found = selectedData.filter(p => p.NAME && p.NAME.trim().toLowerCase().includes(name)
             );
         }
 
         res.render('pages/searchName', {
             title: 'Search by Property Name', searchName: req.query.name || "", data: found
         });
+        loadData();
     });
 
 
 // Route to view all Airbnb data
 app.get('/viewData', (req, res) => {
-    const selectedData = airbnbData.slice(0, 1000);
     res.render('pages/viewData', { title: 'View All Airbnb Filled Data', data: selectedData });
     loadData();
 });
 
 // Route to highlight rows with missing service fees
 app.get('/viewData/clean', (req, res) => {
-    res.render('pages/viewDataClean', { title: 'View All Airbnb Highlighted Data', data: airbnbData });
+    res.render('pages/viewDataClean', { title: 'View All Airbnb Highlighted Data', data: selectedData });
+    loadData();
 });
 
 // Route to filter by price range
@@ -190,7 +194,7 @@ app.get('/viewData/price',
             const min = parseFloat(req.query.min);
             const max = parseFloat(req.query.max);
 
-            found = airbnbData.filter((p) => {
+            found = selectedData.filter((p) => {
                 const price = parseFloat((p.price || "0").replace(/[^0-9.]/g, ""));
                 return price >= min && price <= max;
             });
@@ -203,6 +207,7 @@ app.get('/viewData/price',
             data: found,
             errors: errors.array(),
         });
+        loadData();
     }
 );
 
