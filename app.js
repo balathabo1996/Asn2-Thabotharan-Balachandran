@@ -71,7 +71,7 @@ async function loadData() {
         console.error("Error fetching data:", error);
         airbnbData = [];
     }
-    selectedData = airbnbData.slice(0, 500);
+    selectedData = airbnbData.slice(0, 100);
 }
 
 // Load data and then start the server
