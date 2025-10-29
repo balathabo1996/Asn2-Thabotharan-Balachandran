@@ -97,16 +97,15 @@ app.get('/allData', async (req, res) => {
 
 // Route to get data by index
 app.get('/allData/:index', async (req, res) => {
+    selectedData = await getAirbnbData();
     const index = parseInt(req.params.index);
-    if (!isNaN(index) && index >= 0 && index < airbnbData.length) {
-        selectedData = await getAirbnbData();
+    if (!isNaN(index) && index >= 0 && index < selectedData.length) {
         selectedData = [selectedData[index]];
         res.render('pages/searchIndex', { title: 'Search Property by Index', data: selectedData });
     } else {
         res.status(400).send("Invalid index!");
     }
 });
-
 
 // Route to search by property ID
 app.get('/search/id', query('id')
