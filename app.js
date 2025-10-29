@@ -74,8 +74,6 @@ async function getAirbnbData() {
     return parts.flat();
 }
 
-
-
 // Defining routes and their handlers
 
 // Home route
